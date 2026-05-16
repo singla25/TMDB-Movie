@@ -88,13 +88,26 @@ async function fetchMovies(search = ''){
             data.results.length === 0
         ){
 
+            loading.classList.add('hidden');
+
             moviesContainer.innerHTML = `
 
                 <div class="empty-state">
 
                     <h2>
-                        No Movies Found
+                        😕 No Movies Found
                     </h2>
+
+                    <p>
+                        Try searching another movie.
+                    </p>
+
+                    <button
+                        class="recommend-btn"
+                        onclick="loadTrendingMovies()"
+                    >
+                        Show Recommended Movies
+                    </button>
 
                 </div>
             `;
@@ -121,6 +134,19 @@ async function fetchMovies(search = ''){
     }
 
     loading.classList.add('hidden');
+}
+
+/*
+|--------------------------------------------------------------------------
+| Load Trending Movies
+|--------------------------------------------------------------------------
+*/
+
+function loadTrendingMovies(){
+
+    searchInput.value = '';
+
+    fetchMovies();
 }
 
 /*

@@ -244,3 +244,31 @@ h1{
         grid-template-columns:1fr;
     }
 }
+
+/*
+|--------------------------------------------------------------------------
+| Recommendation Button
+|--------------------------------------------------------------------------
+*/
+
+/* :root{
+    --v-primary-color:#fff;
+} */
+
+.recommend-btn{
+    margin-top:20px;
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    padding:14px 24px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.recommend-btn:hover{
+
+    background:#1d4ed8;
+}
