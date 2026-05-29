@@ -33,7 +33,7 @@ if($search !== ''){
     . "&api_key="
     . TMDB_API_KEY;
 
-}else{
+} else {
 
     $url =
     "https://api.themoviedb.org/3/trending/movie/day?api_key="
@@ -42,29 +42,60 @@ if($search !== ''){
 
 /*
 |--------------------------------------------------------------------------
-| Initialize cURL
+| Initialize HTTP Request for API inPHP
 |--------------------------------------------------------------------------
 */
 
-$curl = curl_init();
+// 1. Initialize
+// $ch = curl_init();
 
-curl_setopt_array($curl,[
+// 2. Set options
+// curl_setopt($ch, CURLOPT_URL, "https://api.example.com/data");
+// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // return response as string
 
-    CURLOPT_URL => $url,
+// 3. Execute
+// $response = curl_exec($ch);
 
-    CURLOPT_RETURNTRANSFER => true,
+// 4. Close
+// curl_close($ch);
 
-    CURLOPT_FOLLOWLOCATION => true,
 
-    CURLOPT_TIMEOUT => 30
-]);
+// Example
+// $ch = curl_init();
+
+// curl_setopt_array($ch, [
+//     CURLOPT_URL            => "https://api.example.com/users",
+//     CURLOPT_RETURNTRANSFER => true,
+//     CURLOPT_HTTPHEADER     => [
+//         "Authorization: Bearer YOUR_TOKEN",
+//         "Content-Type: application/json"
+//     ],
+// ]);
+
+// $response = curl_exec($ch);
+// $data = json_decode($response, true); // parse JSON
+// curl_close($ch);
 
 /*
 |--------------------------------------------------------------------------
-| Execute Request
+| END cURL in API
 |--------------------------------------------------------------------------
 */
 
+
+// 1. Initialize cURL
+$curl = curl_init();
+
+// 2. Set options
+curl_setopt_array($curl,[
+    CURLOPT_URL => $url,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_TIMEOUT => 30
+]);
+
+
+// 3. Execute Request
 $response = curl_exec($curl);
 
 $error = curl_error($curl);
@@ -75,20 +106,14 @@ curl_getinfo(
     CURLINFO_HTTP_CODE
 );
 
+// 4. Close
 curl_close($curl);
 
-/*
-|--------------------------------------------------------------------------
-| Handle Errors
-|--------------------------------------------------------------------------
-*/
 
+// Handle Errors
 if($error){
-
     echo json_encode([
-
         'status' => false,
-
         'message' => $error
     ]);
 
@@ -96,13 +121,9 @@ if($error){
 }
 
 if($http_code !== 200){
-
     echo json_encode([
-
         'status' => false,
-
         'message' => 'TMDB API Failed',
-
         'http_code' => $http_code
     ]);
 

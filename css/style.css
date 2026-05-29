@@ -251,10 +251,6 @@ h1{
 |--------------------------------------------------------------------------
 */
 
-/* :root{
-    --v-primary-color:#fff;
-} */
-
 .recommend-btn{
     margin-top:20px;
     background:#2563eb;
@@ -269,6 +265,5 @@ h1{
 }
 
 .recommend-btn:hover{
-
     background:#1d4ed8;
 }
